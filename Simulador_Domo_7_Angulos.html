@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Domo de Hierro — Laboratorio visual y animación académica</title>
+<style>
+:root{color-scheme:dark;--bg:#06111e;--nav:#101d2d;--panel:#102238;--panel2:#142940;--line:#29405b;--fg:#edf8ff;--muted:#92aec8;--cyan:#6aeeed;--gold:#ffce75;--red:#ff817f;--green:#93efc8}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 80% -20%,#183f60 0%,transparent 55%),linear-gradient(170deg,#061423,#07101b);color:var(--fg);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}.shell{width:min(1430px,calc(100% - 36px));margin:0 auto}.head{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:25px 0 20px}.brand{display:flex;align-items:center;gap:12px}.logo{width:45px;height:45px;border-radius:13px;background:linear-gradient(155deg,#2b6080,#14243e);border:1px solid #5aaac0;display:grid;place-items:center;box-shadow:0 0 20px #33aeca22}.logo svg{width:28px}.eyebrow{font-size:10px;letter-spacing:2.3px;font-weight:800;color:#61dbda;text-transform:uppercase}.brand h1{font-size:clamp(20px,2.4vw,29px);margin:4px 0 0;font-weight:850;letter-spacing:-.8px}.flag{font-size:11px;letter-spacing:1px;border:1px solid #386b78;padding:9px 12px;background:#153b47;border-radius:9px;color:#b0f5e9;font-weight:700}.intro{font-size:13px;color:var(--muted);line-height:1.55;margin:0 0 15px;max-width:900px}.tabs{display:flex;gap:8px;margin-bottom:15px;flex-wrap:wrap}.tab{border:1px solid var(--line);border-radius:11px;padding:12px 16px;background:#112339;color:#a9c4da;cursor:pointer;font-weight:750;font-size:13px}.tab.on{background:#1f5062;border-color:#4bb8bd;color:white}.main{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:15px;align-items:start}.display{border:1px solid #33526a;border-radius:17px;background:#071726;overflow:hidden;box-shadow:0 14px 50px #0006}.displaytop{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;border-bottom:1px solid var(--line);background:#0c2138}.displaytop strong{font-size:12px;letter-spacing:1px}.online{font-size:11px;color:#93ebbc;display:flex;gap:6px;align-items:center}.online i{width:7px;height:7px;background:#63df9e;border-radius:50%;box-shadow:0 0 7px #63df9e}.scene{position:relative}canvas{width:100%;height:auto;aspect-ratio:1000/560;display:block;background:#071a2d}.scenelegend{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:10px 15px;border-top:1px solid #243b54;background:#0d2034;font-size:11px;color:#a0bfd6}.key{display:inline-flex;align-items:center;gap:7px;margin-right:13px}.dot{width:8px;height:8px;border-radius:10px}.dred{background:#f98a6c}.dcyan{background:#5bdfeb}.dgold{background:#ffc66a}.toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;padding:13px 15px;border-top:1px solid #294158;background:#102338}button,select,input{font-family:inherit}.btn{background:#17344d;color:#e5f7ff;border:1px solid #3a637e;cursor:pointer;border-radius:9px;padding:10px 13px;font-size:12px;font-weight:750;min-height:36px}.btn:hover{background:#22526a}.btn.primary{background:#1e727e;border-color:#3aadb4}.btn.primary:hover{background:#27919c}.grow{flex:1}.timeline{flex:1;min-width:130px;accent-color:#69ebdc}#clock{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:#cce8f3}.side{background:linear-gradient(150deg,#102238,#102037);border:1px solid #324e68;border-radius:17px;padding:18px;box-shadow:0 10px 40px #0003}.side h2{font-size:16px;margin:0 0 6px}.asideNote{font-size:12px;color:var(--muted);line-height:1.6;margin:0 0 16px}.control{margin:17px 0}.linehead{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:7px}.linehead label{font-size:12px;color:#caddea;font-weight:650}.num{font-weight:800;color:#86f0e8;font-size:12px}input[type="range"]{width:100%;accent-color:#56ddda;cursor:pointer}select{width:100%;background:#18324a;border:1px solid #42617b;border-radius:9px;padding:10px 12px;color:white;font-size:13px}.check{display:flex;align-items:center;gap:9px;font-size:12px;color:#a7c3d7;margin-top:12px}.check input{accent-color:#56ddda;width:16px;height:16px}.divider{height:1px;background:#294357;margin:18px 0}.mini{border-radius:11px;background:#0b1d30;border:1px solid #244157;padding:11px;font-size:12px;line-height:1.55;color:#bfd3e5}.mini strong{color:#7df1df}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}.stat{padding:16px;background:#102238;border:1px solid #304b62;border-radius:13px}.stat .lbl{font-size:11px;letter-spacing:.3px;color:#a4bcd0;margin-bottom:8px}.stat .val{font-size:clamp(18px,2.5vw,29px);font-weight:850;color:#f0fbff}.stat .val span{font-size:12px;font-weight:500;color:#99b5c7}.lower{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:15px 0 30px}.panel{border:1px solid #2e4a61;background:#102138;border-radius:14px;padding:19px}.panel h3{font-size:14px;margin:0 0 11px}.panel p,.panel li{font-size:12px;color:#a4bfd2;line-height:1.75}.panel p{margin:6px 0}.formula{display:block;border-radius:8px;background:#08182a;border-left:3px solid #55d6d7;padding:13px;color:#d3f8f5;line-height:1.85;font:13px/1.8 ui-monospace,Cascadia Code,Consolas,monospace;white-space:normal}.foot{margin-bottom:24px;font-size:11px;color:#7e9bb3;line-height:1.6}.off{display:none!important}.eventlist{display:grid;grid-template-columns:1fr 1fr;gap:6px}.event{background:#122d43;padding:9px 10px;border-radius:8px;font-size:11px;color:#d1e2ee;display:flex;justify-content:space-between;border:1px solid #24485e}.event b{color:#a8cadd}.event.done b{color:#74e8cc}.event.queued b{color:#90a7b5}.chip{display:inline-block;padding:4px 8px;border:1px solid #406678;border-radius:12px;color:#95dfeb;font-size:10px;margin-top:8px}@media(max-width:1050px){.main{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr;column-gap:30px}.side h2,.side>.asideNote,.side>.divider,.side>.mini{grid-column:1/-1}}@media(max-width:700px){.shell{width:calc(100% - 20px)}.head{padding-top:18px;align-items:start}.flag{display:none}.main{display:block}.side{margin-top:12px;display:block}.stats{grid-template-columns:repeat(2,1fr)}.lower{grid-template-columns:1fr}.btn{padding:8px 10px}#clock{min-width:45px}.displaytop strong{font-size:11px}.scenelegend{font-size:10px}}
+
+/* Panel de magnitudes instantáneas */
+.telemetry{margin:15px 0 0;border:1px solid #37516a;border-radius:14px;background:#0d2134;padding:17px 19px 18px}
+.telemetryhead{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:13px}
+.telemetryhead h2{font-size:17px;margin:4px 0 4px;font-weight:800;letter-spacing:-.3px}
+.telemetryhead p{margin:0;color:#a2bed1;font-size:12px;line-height:1.5}
+.telemetrytag{color:#7ee7d7;letter-spacing:1.55px;font-size:10px;font-weight:800}
+.telemetrybadge{border:1px solid #38677a;background:#163549;border-radius:9px;color:#d1f4f2;padding:9px 12px;font-size:12px;white-space:nowrap}
+.telemetrybadge strong{font-family:ui-monospace,Consolas,monospace;font-size:15px}
+.telemetrycols{display:grid;grid-template-columns:1.55fr 1fr;gap:13px}
+.telemetrytablewrap{overflow-x:auto;border:1px solid #29495c;border-radius:9px}
+.telemetrytable{border-collapse:collapse;width:100%;font-size:11.3px;min-width:615px}
+.telemetrytable th,.telemetrytable td{text-align:left;padding:10px 11px;border-bottom:1px solid #254255;white-space:nowrap}
+.telemetrytable tr:last-child td{border-bottom:0}
+.telemetrytable th{background:#143248;color:#99c6d8;font-size:10px;letter-spacing:.5px;font-weight:800}
+.telemetrytable td{color:#e4f1f7;font-variant-numeric:tabular-nums}
+.telemetrytable tr.selected td{background:#1d3f53}
+.stateDot{display:inline-block;width:6px;height:6px;margin-right:6px;border-radius:50%;background:#849aac}
+.stateDot.active{background:#7ff2d9;box-shadow:0 0 8px #7ff2d96b}
+.stateDot.done{background:#ffc982}
+.inspectPanel{background:#102c40;border:1px solid #2d5268;border-radius:10px;padding:15px;min-width:0}
+.inspectPanel h3{font-size:13px;margin:0 0 6px;color:#e1f8ff}
+.inspectPanel p{font-size:11px;line-height:1.6;color:#95b8ce;margin:7px 0 12px}
+.inspectPanel select{margin:4px 0 12px}
+.calcLive{font-size:11.2px;line-height:1.85;font-family:ui-monospace,Consolas,monospace;color:#c6ebe7;overflow-wrap:anywhere;white-space:normal}
+.calcLive b{color:#fff0b5}
+.instantgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:0 0 14px}
+.instant{border:1px solid #31566b;background:#132f43;border-radius:10px;padding:12px 9px;min-width:0}
+.instant label{display:block;color:#a0bed0;font-size:10px;letter-spacing:.45px;margin-bottom:7px}
+.instant strong{font-size:clamp(17px,1.9vw,24px);color:#e7fffb;font-weight:850;font-variant-numeric:tabular-nums;white-space:nowrap}
+.instant small{font-size:10px;color:#8bb4c7}
+.liveColumns{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.calcSection{border:1px solid #2a4b60;border-radius:10px;padding:13px;background:#102b40;min-width:0}
+.calcSection h3{font-size:12px;color:#e5f7ff;margin:0 0 8px}
+.liveProgress{height:7px;background:#274257;border-radius:20px;overflow:hidden;margin:11px 0 5px}
+.liveProgress>div{height:100%;background:linear-gradient(90deg,#4ca1b5,#86f0db);width:0%;transition:width .06s linear}
+@media(max-width:950px){.telemetrycols,.liveColumns{grid-template-columns:1fr}.instantgrid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.telemetry{padding:12px}.telemetryhead{align-items:flex-start;flex-wrap:wrap}.instantgrid{grid-template-columns:repeat(2,1fr)}}
+
+/* Edición 4: vistas sincronizadas y proyección espacial */
+.tabs{align-items:center}.tabhint{margin-left:auto;color:#7299ad;font-size:11px;letter-spacing:.2px;padding:5px 2px}
+.canvasStack{position:relative}.scene{isolation:isolate}#display3d{cursor:grab;touch-action:none}#display3d.drag{cursor:grabbing}
+.cameraHint{position:absolute;z-index:3;right:14px;bottom:12px;display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:flex-end;pointer-events:none}
+.cameraHint span{border:1px solid #4c819666;border-radius:7px;background:#081b30d9;color:#d9f9fc;padding:7px 9px;font-size:10px}
+.cameraButton{pointer-events:auto;background:#133448df;color:#c9f7f5;border:1px solid #4f9aa7;border-radius:8px;padding:8px 10px;font:700 10px Segoe UI,Arial;cursor:pointer}
+.cameraButton:hover{background:#246b78}.miniTitle{margin:13px 0 8px;color:#76cbd2;font-size:10px;letter-spacing:1px;font-weight:800}
+#miniGraph{width:100%;height:142px;aspect-ratio:auto;background:#081c2f;border:1px solid #284b65;border-radius:8px}
+@media(max-width:800px){.tabhint{width:100%;margin-left:0}.cameraHint{left:8px;right:8px;bottom:9px}.cameraHint span{font-size:9px;padding:5px 6px}.cameraButton{font-size:9px;padding:6px}}
+
+/* Cuadros completos de cada móvil, edición con cálculo por objeto */
+.trackGrid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:14px 0}
+.trackPanel{border:1px solid #335269;border-radius:12px;background:#0b2438;min-width:0;overflow:hidden}
+.trackPanel h3{margin:0;padding:13px 15px;font-size:13px;background:#153048;border-bottom:1px solid #335269;display:flex;justify-content:space-between;align-items:center}
+.trackPanel h3 span{font:11px Consolas,monospace;color:#a5d7e5}
+.trackScroll{overflow-x:auto}
+.trackTable{width:100%;border-collapse:collapse;min-width:635px;font-size:11px}
+.trackTable th,.trackTable td{padding:10px 9px;border-bottom:1px solid #2b4557;text-align:left;white-space:nowrap;font-variant-numeric:tabular-nums}
+.trackTable th{color:#acc6d6;font-size:10px;background:#0e293e}
+.trackTable td{color:#e0f2f5}.trackTable tr:last-child td{border:0}
+.trackTable tbody tr{cursor:pointer}.trackTable tbody tr:hover td{background:#1a3c53}.trackTable tr.selected td{background:#22516a}
+.trackTable .inCol{color:#ffb99d;font-weight:bold}.trackTable .defCol{color:#83ede1;font-weight:bold}
+.inspectorGrid{display:grid;grid-template-columns:.82fr 1.18fr;gap:13px;margin:14px 0}
+.actorData{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}
+.actorMetric{background:#092033;border:1px solid #31546a;border-radius:8px;padding:9px;min-width:0}
+.actorMetric small{display:block;color:#93b7c9;font-size:9px;line-height:1.4;margin-bottom:4px}
+.actorMetric strong{color:#f2fafb;font:700 12px Consolas,monospace;white-space:normal}
+.mathProof{padding:13px;background:#091f32;border:1px solid #2a5269;border-radius:10px;font:11px/1.95 Consolas,monospace;color:#cce4ee;overflow-wrap:anywhere}
+.mathProof .sec{font-weight:bold;color:#83e5e4;margin:9px 0 3px}.mathProof .sec:first-child{margin-top:0}
+.mathProof b{color:#ffe1a3}.mathProof .mathLine{border-bottom:1px dotted #2b4558;padding:2px 0}
+.allData{margin:14px 0 0;background:#092031;border:1px solid #38576b;border-radius:10px;overflow:hidden}
+.allData summary{cursor:pointer;padding:12px 15px;color:#d7f5f7;font-weight:700;font-size:12px}
+.allData .explain{padding:0 15px 8px;font-size:11px;color:#9fbacf}
+.allData table{min-width:1120px}
+.tinyKey{color:#9ab5c4;font-size:10px;line-height:1.55;margin:8px 0}
+
+.anglePanel{border:1px solid #426579;background:linear-gradient(135deg,#0d3144,#122e43);padding:13px 15px;border-radius:12px;margin:12px 0 6px}
+.anglePanel .angleTitle{display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap;font-size:13px;font-weight:800;color:#dcfbf7}
+.anglePanel .angleTitle small{font-size:10px;color:#b0cad7;font-weight:500}
+.angleCards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:10px}
+.angleCard{background:#0b2234;border:1px solid #2f6074;padding:10px 12px;border-radius:9px;min-width:0}
+.angleCard small{display:block;font-size:10px;line-height:1.4;color:#adcbd7;margin-bottom:5px}
+.angleCard strong{display:block;font:700 clamp(17px,2.15vw,26px) Consolas,monospace;color:#ffe1ac}
+.angleExplain{font-size:11px;line-height:1.55;color:#a4c4d3;margin:9px 0 0}
+#angleDiagram{display:block;width:100%;max-width:480px;height:122px;aspect-ratio:auto;margin:10px auto 4px;background:#0a1c2e;border:1px solid #35546a;border-radius:8px}
+.angleCellsLab{margin:0 0 13px}
+@media(max-width:610px){.angleCards{grid-template-columns:repeat(2,1fr)}}
+.noGlitz{font-weight:500;color:#a6ced4;font-size:11px}
+@media(max-width:1060px){.trackGrid,.inspectorGrid{grid-template-columns:1fr}}
+@media(max-width:620px){.actorData{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="shell">
+ <header class="head"><div class="brand"><div class="logo"><svg viewBox="0 0 40 40" fill="none"><path d="M20 4L31 9V18C31 25 25 32 20 35C15 32 9 25 9 18V9L20 4Z" stroke="#86F6EB" stroke-width="2.6"/><path d="M13 22L20 12L27 22M20 12V29" stroke="#86F6EB" stroke-width="2.2"/></svg></div><div><div class="eyebrow">Laboratorio de física · edición 7.0 · ángulos en tiempo real</div><h1>DOMO DE HIERRO <span style="font-weight:350;color:#9dc6d8">/ VISUALIZADOR</span></h1></div></div><div class="flag">● SIMULACIÓN ACADÉMICA</div></header>
+ <p class="intro"><strong style="color:#f2fbff">Anthony Joel Lopez Espinal</strong> · Una escena 3D con Z vertical que puedes girar con el mouse y una vista 2D en el plano X-Z y un laboratorio independiente para resolver <strong style="color:#c7e4ed">movimiento parabólico con fórmulas físicas</strong>. Los encuentros de la escena están preprogramados con fines visuales. Cada proyectil y cada defensor ficticio dispone de cálculos y ángulos iniciales e instantáneos, sin modelar el guiado de armas reales.</p>
+ <div class="tabs"><button id="tab3D" class="tab on">◈ Escenario 3D</button><button id="tabScene" class="tab">⌁ Escenario 2D</button><button id="tabLab" class="tab">∑ Cálculos de física</button><div class="tabhint">X–Y: suelo · Z: altura · datos sincronizados</div></div>
+ <div class="main">
+  <section class="display">
+   <div class="displaytop"><strong id="screenTitle">ESCENA ESPACIAL / VISTA 3D</strong><div class="online"><i></i><span id="headState">SISTEMA EDUCATIVO ACTIVO</span></div></div>
+   <div class="scene"><canvas id="display3d" width="1000" height="560" aria-label="Vista espacial en perspectiva, arrastra para girar y usa la rueda para acercar"></canvas><canvas id="display" class="off" width="1000" height="560" aria-label="Vista lateral de los recorridos de cohetes ficticios"></canvas><div id="camHint" class="cameraHint"><span>↔ Arrastra para girar</span><span>◉ Rueda: acercar / alejar</span><button id="resetCamera" class="cameraButton">↺ Centrar cámara</button></div></div>
+   <div class="scenelegend" id="legendScene"><div><span class="key"><i class="dot dred"></i> Cohete entrante</span><span class="key"><i class="dot dcyan"></i> Defensor ficticio</span><span class="key"><i class="dot dgold"></i> Evento visual</span></div><span id="viewLegend">3D GIRATORIO · Recorridos ficticios predefinidos</span></div>
+   <div class="scenelegend off" id="legendLab"><div><span class="key"><i class="dot dcyan"></i> Trayectoria calculada</span><span class="key"><i class="dot dgold"></i> Altura máxima Z</span></div><span>Plano X–Z · Y = 0 · sin rozamiento</span></div>
+   <div class="toolbar"><button id="play" class="btn primary">❚❚ Pausar</button><button id="restart" class="btn">↺ Reiniciar</button><input id="timeline" class="timeline" type="range" min="0" max="20" step="0.01" value="0" aria-label="Tiempo de simulación"><span id="clock">00,00 s</span><button id="capture" class="btn">⬇ Captura PNG</button><button id="exportCsv" class="btn">⬇ Datos CSV</button></div>
+  </section>
+  <aside class="side" id="controlsScene"><h2>Centro de control</h2><p class="asideNote">X e Y representan el plano horizontal; Z representa la altura. La vista 2D es una proyección sobre X–Z y utiliza el mismo tiempo.</p>
+   <div class="control"><div class="linehead"><label for="wave">Escenario</label><b class="num">3 opciones</b></div><select id="wave"><option value="4">Secuencia corta · 4 cohetes</option><option value="6" selected>Secuencia media · 6 cohetes</option><option value="8">Secuencia extensa · 8 cohetes</option></select></div>
+   <div class="control"><div class="linehead"><label for="tempo">Velocidad de la animación</label><b id="tempoVal" class="num">1,0×</b></div><input type="range" id="tempo" min="0.5" max="2.5" step="0.25" value="1"></div>
+   <div class="divider"></div><label class="check"><input type="checkbox" id="paths" checked> Mostrar trayectorias punteadas</label><label class="check"><input type="checkbox" id="radar" checked> Mostrar barrido de radar decorativo</label><label class="check"><input type="checkbox" id="tags" checked> Etiquetas de los cohetes</label>
+   <div class="divider"></div><div class="mini"><strong>Dos cámaras de la misma secuencia</strong><br>En 3D puedes girar la cámara y cambiar el acercamiento. En 2D ves el plano X–Z con la altura en Z. Los destellos de coincidencia están fijados de antemano: no hay cálculo real de guiado.</div>
+  </aside>
+  <aside class="side off" id="controlsLab"><h2>Parámetros del ejercicio</h2><p class="asideNote">Modifica las magnitudes físicas de un lanzamiento ficticio y observa los resultados calculados.</p>
+   <div class="control"><div class="linehead"><label for="speed">Velocidad inicial v₀</label><b id="speedVal" class="num">30 m/s</b></div><input id="speed" type="range" min="15" max="45" step="1" value="30"></div>
+   <div class="control"><div class="linehead"><label for="angle">Ángulo de tiro θ</label><b id="angleVal" class="num">45°</b></div><input id="angle" type="range" min="15" max="75" step="1" value="45"></div>
+   <div class="control"><div class="linehead"><label for="gravity">Gravedad g</label><b id="gravityVal" class="num">9,81 m/s²</b></div><input id="gravity" type="range" min="2" max="14" step="0.01" value="9.81"></div>
+   <div class="divider"></div><div class="mini"><strong>Atención:</strong> estas fórmulas se aplican a un móvil ideal. No calculan maniobras de cohetes guiados ni parámetros para realizar una interceptación.</div>
+   <div class="chip">Sistema: X avance / Y lateral / Z altura</div>
+  </aside>
+ </div>
+ <div class="stats" id="statsScene"><div class="stat"><div class="lbl">OBJETOS PROGRAMADOS</div><div class="val" id="sCount">06 <span>cohetes</span></div></div><div class="stat"><div class="lbl">OBJETOS EN PANTALLA</div><div class="val" id="sActive">00</div></div><div class="stat"><div class="lbl">DESTELLOS REGISTRADOS</div><div class="val" id="sHits">00</div></div><div class="stat"><div class="lbl">TIEMPO ESCÉNICO</div><div class="val" id="sTime">0,0 <span>s</span></div></div></div>
+ <div class="stats off" id="statsLab"><div class="stat"><div class="lbl">ALCANCE R</div><div class="val" id="mRange">91,74 <span>m</span></div></div><div class="stat"><div class="lbl">ALTURA MÁXIMA H</div><div class="val" id="mHeight">22,94 <span>m</span></div></div><div class="stat"><div class="lbl">TIEMPO TOTAL T</div><div class="val" id="mTime">4,32 <span>s</span></div></div><div class="stat"><div class="lbl">TIEMPO AL ÁPICE</div><div class="val" id="mApex">2,16 <span>s</span></div></div></div>
+
+ <section class="telemetry" id="telemetryScene" aria-live="off">
+  <div class="telemetryhead"><div><div class="telemetrytag">CINEMÁTICA 3D · DOS GRUPOS · Z HACIA ARRIBA</div><h2>Datos y cálculos de todos los móviles</h2><p>Se muestran tanto los <strong>proyectiles entrantes</strong> como los <strong>defensores ficticios</strong>. Cada recorrido tiene posición y velocidad iniciales, ángulos, altura máxima, desplazamiento y ecuaciones actualizadas. Unidad: <b>u.e.</b> (unidad escénica), no metros reales.</p></div><div class="telemetrybadge">t = <strong id="sceneNow">0,00 s</strong></div></div>
+  <div class="anglePanel" aria-label="Ángulos de vuelo de un objeto seleccionado">
+   <div class="angleTitle"><span>ÁNGULOS DEL PROYECTIL O DEFENSOR SELECCIONADO</span><small id="angleSelected">Proyectil A1 · t = 0 s</small></div>
+   <div class="angleCards">
+    <div class="angleCard"><small>Elevación inicial θ₀</small><strong id="sceneTheta0">—</strong></div>
+    <div class="angleCard"><small>Azimut inicial φ₀</small><strong id="scenePhi0">—</strong></div>
+    <div class="angleCard"><small>Elevación instantánea θ(t)</small><strong id="sceneThetaNow">—</strong></div>
+    <div class="angleCard"><small>Azimut instantáneo φ(t)</small><strong id="scenePhiNow">—</strong></div>
+   </div>
+   <p class="angleExplain">θ: inclinación respecto al plano horizontal X–Y (positivo = asciende; negativo = desciende). φ: orientación horizontal medida desde +X hacia +Y. Los valores se actualizan cuando mueves el tiempo o eliges otro objeto.</p>
+  </div>
+  <div class="trackGrid">
+   <div class="trackPanel"><h3><span style="color:#ffb59a">●</span> Proyectiles entrantes <span id="attackerNum">6 objetos</span></h3><div class="trackScroll"><table class="trackTable"><thead><tr><th>ID</th><th>Estado</th><th>τ (s)</th><th>X (u.e.)</th><th>Y (u.e.)</th><th>Z ↑ (u.e.)</th><th>|v| (u.e./s)</th><th>θ₀ (°)</th><th>φ₀ (°)</th><th>θ(t) (°)</th><th>φ(t) (°)</th><th>Progreso</th></tr></thead><tbody id="attackerRows"></tbody></table></div></div>
+   <div class="trackPanel"><h3><span style="color:#82eadd">●</span> Defensores ficticios <span id="defenderNum">6 objetos</span></h3><div class="trackScroll"><table class="trackTable"><thead><tr><th>ID</th><th>Estado</th><th>τ (s)</th><th>X (u.e.)</th><th>Y (u.e.)</th><th>Z ↑ (u.e.)</th><th>|v| (u.e./s)</th><th>θ₀ (°)</th><th>φ₀ (°)</th><th>θ(t) (°)</th><th>φ(t) (°)</th><th>Progreso</th></tr></thead><tbody id="defenderRows"></tbody></table></div></div>
+  </div>
+  <div class="inspectorGrid">
+   <div class="inspectPanel"><h3>Ficha individual: datos iniciales y resultados</h3><p>Selecciona cualquier proyectil o defensor, o haz clic en su fila. La ficha cambia con el tiempo de la simulación.</p><select id="inspectRocket" aria-label="Selecciona proyectil o defensor"></select><div class="actorData" id="actorMetrics"></div>
+   <div class="miniTitle">ÁNGULOS θ Y φ DEL OBJETO ELEGIDO</div><canvas id="angleDiagram" width="480" height="122" aria-label="Diagramas del ángulo de elevación y azimut, actualizados durante el vuelo"></canvas><div class="miniTitle">ALTURA Z Y RAPIDEZ DEL OBJETO ELEGIDO</div><canvas id="miniGraph" width="420" height="156" aria-label="Altura y rapidez para el objeto seleccionado"></canvas>
+   <div class="liveProgress"><div id="sceneProgress"></div></div><p id="sceneProgressLabel" class="tinyKey">Progreso del recorrido</p></div>
+   <div class="inspectPanel"><h3>Procedimiento matemático actualizado en vivo</h3><p>El tiempo local τ se mide desde la aparición de cada móvil. Estas son ecuaciones paramétricas de recorridos fijados previamente, no algoritmos de guiado.</p><div class="mathProof" id="sceneCalculation">Selecciona un objeto y reproduce la secuencia.</div></div>
+  </div>
+  <details class="allData" id="allInitials"><summary>Ver todos los datos iniciales y resultados por objeto (tabla completa)</summary><p class="explain">Contiene 4, 6 u 8 móviles de cada grupo. v₀ y sus componentes, ángulos iniciales, aceleraciones de la curva, duración, desplazamiento horizontal y máxima altura Z. Valores ficticios coherentes con la trayectoria mostrada.</p><div class="trackScroll"><table class="trackTable"><thead><tr><th>Tipo</th><th>ID</th><th>t salida</th><th>Δt</th><th>X₀</th><th>Y₀</th><th>Z₀</th><th>v₀x</th><th>v₀y</th><th>v₀z</th><th>|v₀|</th><th>θ₀ elev.</th><th>φ₀ azimut</th><th>aₓ</th><th>aᵧ</th><th>a𝓏</th><th>Z máx.</th><th>ΔXY</th></tr></thead><tbody id="initialRows"></tbody></table></div></details>
+  <p class="tinyKey">Modelo didáctico: las coincidencias de trayectorias y sus tiempos están predefinidos. Los valores que se presentan corresponden a las curvas dibujadas en la escena; no describen interceptores, proyectiles ni capacidades militares reales. En la pestaña «Cálculos de física» hay un ejercicio independiente en SI con gravedad constante.</p>
+ </section>
+ <section class="telemetry off" id="telemetryLab" aria-live="off">
+  <div class="telemetryhead"><div><div class="telemetrytag">CINEMÁTICA · MAGNITUDES EN TIEMPO REAL</div><h2>Posición y velocidad instantáneas</h2><p>El tiempo cambia al reproducir, pausar o desplazar el control inferior. Los resultados están expresados en unidades SI.</p></div><div class="telemetrybadge">t = <strong id="labNow">0,00 s</strong></div></div>
+  <div class="instantgrid">
+   <div class="instant"><label>POSICIÓN X</label><strong id="instantX">0,00</strong> <small>m</small></div>
+   <div class="instant"><label>LATERAL Y</label><strong id="instantY">0,00</strong> <small>m</small></div><div class="instant"><label>ALTURA Z</label><strong id="instantZ">0,00</strong> <small>m</small></div>
+   <div class="instant"><label>VELOCIDAD Vx</label><strong id="instantVx">0,00</strong> <small>m/s</small></div>
+   <div class="instant"><label>VELOCIDAD Vy</label><strong id="instantVy">0,00</strong> <small>m/s</small></div><div class="instant"><label>VELOCIDAD Vz</label><strong id="instantVz">0,00</strong> <small>m/s</small></div>
+   <div class="instant"><label>RAPIDEZ |v|</label><strong id="instantV">0,00</strong> <small>m/s</small></div>
+   <div class="instant"><label>FASE DEL MOVIMIENTO</label><strong style="font-size:16px" id="instantPhase">SALIDA</strong></div>
+   <div class="instant"><label>ELEVACIÓN INICIAL θ₀</label><strong id="labTheta0">45,00</strong> <small>°</small></div>
+   <div class="instant"><label>ELEVACIÓN ACTUAL θ(t)</label><strong id="labThetaNow">45,00</strong> <small>°</small></div>
+   <div class="instant"><label>AZIMUT INICIAL φ₀</label><strong id="labPhi0">0,00</strong> <small>°</small></div>
+   <div class="instant"><label>AZIMUT ACTUAL φ(t)</label><strong id="labPhiNow">0,00</strong> <small>°</small></div>
+  </div>
+  <div class="liveColumns">
+   <div class="calcSection"><h3>Sustitución numérica de posición</h3><div class="calcLive" id="labPositionSteps"></div></div>
+   <div class="calcSection"><h3>Sustitución numérica de velocidad</h3><div class="calcLive" id="labVelocitySteps"></div></div>
+  </div>
+  <div class="liveProgress"><div id="labProgress"></div></div><p class="asideNote" style="margin:6px 0 0" id="labProgressLabel">0 % del tiempo de vuelo transcurrido</p>
+ </section>
+ <div class="lower" id="lowerScene"><article class="panel"><h3>Registro de la secuencia</h3><div id="events" class="eventlist"></div></article><article class="panel"><h3>¿Qué se está representando?</h3><p>Es una recreación gráfica del concepto de defensa antimisiles. Los objetos usan siluetas estilizadas y curvas cuadráticas, cuyas posiciones y velocidades se calculan en tiempo escénico para cada móvil. La transformación espacial usa Z para altura y Y para desplazamiento lateral.</p><p>Los momentos de encuentro se eligen previamente para que se entiendan las animaciones. <strong>La escena no proporciona soluciones de interceptación física.</strong></p></article></div>
+ <div class="lower off" id="lowerLab"><article class="panel"><h3>Ecuaciones que cambian con los controles</h3><div class="formula" id="liveFormula">x(t) = 21,2132 · t<br>y(t) = 0<br>z(t) = 21,2132 · t − 4,905 · t²<br>v<sub>x</sub> = 21,2132 m/s<br>v<sub>y</sub> = 0 m/s<br>v<sub>z</sub>(t) = 21,2132 − 9,81 · t</div></article><article class="panel"><h3>Fórmulas del cuaderno</h3><div class="formula">R = v₀² · sin(2θ) / g<br>H<sub>max</sub> = v₀² · sin²(θ) / (2g)<br>T = 2v₀ · sin(θ) / g<br>t<sub>ápice</sub> = v₀ · sin(θ) / g<br>|v| = √(v<sub>x</sub>²+v<sub>y</sub>²+v<sub>z</sub>²)</div><p>En este ejercicio el azimut es cero, por lo que y(t)=0. Los ejes horizontales son X e Y; la gravedad actúa solamente sobre Z.</p></article></div>
+ <p class="foot"><strong>Autor: Anthony Joel Lopez Espinal.</strong> Proyecto académico de cinemática y visualización científica, inspirado estéticamente en el Domo de Hierro. Magnitudes SI en el modo laboratorio y cálculos individuales en unidades escénicas en las vistas 3D y 2D. Convención fija: Z vertical, X/Y horizontales. Sin datos de capacidad, operación, sensores o control de ningún sistema real.</p>
+</div>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id),c=$('display'),ctx=c.getContext('2d'),W=1000,H=560,G=9.81;
+const designs=[
+ {p:[[ -30,110],[190,62],[760,483]],s:0.0,d:10.3,f:.73,b:185},
+ {p:[[1040,95],[790,48],[480,483]],s:.85,d:10.1,f:.77,b:840},
+ {p:[[600,-30],[530,105],[320,483]],s:2.25,d:9.3,f:.70,b:545},
+ {p:[[70,-30],[210,102],[890,483]],s:3.05,d:10.9,f:.75,b:185},
+ {p:[[1060,155],[925,140],[630,483]],s:4.25,d:10.2,f:.77,b:840},
+ {p:[[370,-35],[380,20],[470,483]],s:5.20,d:10.7,f:.74,b:545},
+ {p:[[ -35,200],[65,118],[430,483]],s:6.70,d:10.2,f:.78,b:185},
+ {p:[[1020,65],[675,80],[140,483]],s:7.4,d:10.0,f:.77,b:840}
+];
+let mode='scene',sceneView='3d',time=0,playing=true,last=0,particles=[],seedStars=[];let nextParticle=0;
+const fmt=(n,k=2)=>Number(n).toLocaleString('es-EC',{minimumFractionDigits:k,maximumFractionDigits:k});
+const lerp=(a,b,t)=>a+(b-a)*t;const bez=(pts,t)=>{let a=pts[0],b=pts[1],c=pts[2],q=1-t;return{x:q*q*a[0]+2*q*t*b[0]+t*t*c[0],y:q*q*a[1]+2*q*t*b[1]+t*t*c[1]}};
+const derivative=(p,t)=>({x:2*(1-t)*(p[1][0]-p[0][0])+2*t*(p[2][0]-p[1][0]),y:2*(1-t)*(p[1][1]-p[0][1])+2*t*(p[2][1]-p[1][1])});
+const missions=()=>designs.slice(0,Number($('wave').value)).map((m,i)=>{const hit=m.s+m.d*m.f;return{...m,i,hit,launch:hit-1.7,dest:bez(m.p,m.f)};});
+const endScene=()=>Math.max(...missions().map(m=>m.hit))+2.4;
+function lab(){
+ const v=Number($('speed').value),ang=Number($('angle').value),g=Number($('gravity').value),th=ang*Math.PI/180;
+ const vx=v*Math.cos(th),vy=0,vz=v*Math.sin(th),T=2*vz/g,R=vx*T,Hm=vz*vz/(2*g),ta=vz/g;
+ return{v,ang,g,vx,vy,vz,T,R,Hm,ta};
+}
+const endTime=()=>mode==='scene'?endScene():lab().T;
+function reset(){time=0;playing=true;updateUI();draw();}
+function setMode(which,view){
+ const oldMode=mode; mode=which;if(which==='scene')sceneView=view||sceneView;
+ for(const [id,show] of [['controlsScene',which==='scene'],['controlsLab',which==='lab'],['statsScene',which==='scene'],['statsLab',which==='lab'],['lowerScene',which==='scene'],['lowerLab',which==='lab'],['legendScene',which==='scene'],['legendLab',which==='lab'],['telemetryScene',which==='scene'],['telemetryLab',which==='lab']])$(id).classList.toggle('off',!show);
+ $('tab3D').classList.toggle('on',which==='scene'&&sceneView==='3d');$('tabScene').classList.toggle('on',which==='scene'&&sceneView==='2d');$('tabLab').classList.toggle('on',which==='lab');
+ $('display3d').classList.toggle('off',which!=='scene'||sceneView!=='3d');$('display').classList.toggle('off',which==='scene'&&sceneView==='3d');$('camHint').classList.toggle('off',which!=='scene'||sceneView!=='3d');
+ $('viewLegend').textContent=sceneView==='3d'?'3D · Z vertical, plano horizontal X–Y':'2D · Proyección X–Z, altura Z';
+ $('screenTitle').textContent=which==='lab'?'LABORATORIO FÍSICO / MOVIMIENTO PARABÓLICO':sceneView==='3d'?'ESCENA ESPACIAL / X–Y SUELO, Z ↑':'ESCENA LATERAL / PLANO X–Z, Z ↑';
+ $('headState').textContent=which==='scene'?'ESCENA ILUSTRATIVA':'CÁLCULO IDEAL';
+ if(oldMode!==which)reset();else{updateUI();draw();}
+}
+$('tab3D').onclick=()=>setMode('scene','3d');$('tabScene').onclick=()=>setMode('scene','2d');$('tabLab').onclick=()=>setMode('lab');
+$('play').onclick=()=>{if(time>=endTime()-.01)time=0;playing=!playing;updateUI();};$('restart').onclick=reset;
+$('timeline').oninput=()=>{time=Number($('timeline').value);playing=false;updateUI();draw();};
+$('wave').onchange=()=>{rocketOptions();reset();};for(let k of ['tempo','paths','radar','tags'])$(k).addEventListener('input',()=>{updateUI();draw()});for(let k of ['speed','angle','gravity'])$(k).addEventListener('input',()=>{time=0;playing=false;updateUI();draw()});
+$('inspectRocket').onchange=()=>{updateUI();draw();};
+$('exportCsv').onclick=()=>{
+ let lines=[],name='';
+ if(mode==='lab'){
+  const m=lab();lines=['tiempo_s,x_m,y_m,z_altura_m,vx_m_s,vy_m_s,vz_m_s,rapidez_m_s,elevacion_actual_grados,azimut_actual_grados'];
+  for(let j=0;j<=160;j++){const t=m.T*j/160,x=m.vx*t,z=Math.max(0,m.vz*t-.5*m.g*t*t),vz=m.vz-m.g*t;lines.push([t,x,0,z,m.vx,0,vz,Math.hypot(m.vx,vz),Math.atan2(vz,Math.hypot(m.vx,m.vy))*180/Math.PI,0].map(n=>n.toFixed(5)).join(','));}
+  name='Anthony_Datos_Fisica.csv';
+ }else{
+  lines=['tipo,id,t_global_s,t_local_s,x0_ue,y0_ue,z0_ue,v0x_ue_s,v0y_ue_s,v0z_ue_s,v0_ue_s,angulo_elevacion_grados,azimut_grados,ax_ue_s2,ay_ue_s2,az_ue_s2,duracion_s,z_max_ue,desplazamiento_xy_ue,x_actual_ue,y_actual_ue,z_actual_ue,vx_actual_ue_s,vy_actual_ue_s,vz_actual_ue_s,rapidez_actual_ue_s,elevacion_actual_grados,azimut_actual_grados,fase'];
+  allActors().forEach(a=>{for(let j=0;j<=100;j++){
+   const t=a.start+a.duration*j/100,q=actorState(a,t),vals=[a.defender?'defensor':'proyectil',a.id,t,q.tau,...a.p0,...a.v0,a.speed0,a.theta0,a.phi0,...a.a,a.duration,a.zmax,a.reach,...q.p,...q.v,q.speed,q.theta,q.phi,q.status];
+   lines.push(vals.map(n=>typeof n==='number'?n.toFixed(5):n).join(','));
+  }});
+  name='Anthony_Datos_Todos_Proyectiles_y_Defensores.csv';
+ }
+ const blob=new Blob(['\uFEFF'+lines.join('\n')],{type:'text/csv;charset=utf-8'});const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),3000);
+};
+$('capture').onclick=()=>{draw();let a=document.createElement('a');a.href=(mode==='scene'&&sceneView==='3d'?canvas3:c).toDataURL('image/png');a.download=mode==='lab'?'Anthony_Grafica_Fisica.png':`Anthony_Escenario_${sceneView.toUpperCase()}.png`;a.click()};
+function rocketOptions(){
+ const old=$('inspectRocket').value;const num=Number($('wave').value);
+ $('inspectRocket').innerHTML=Array.from({length:num},(_,i)=>`<option value="A${i+1}">Proyectil ${String(i+1).padStart(2,'0')}</option>`).join('')+Array.from({length:num},(_,i)=>`<option value="D${i+1}">Defensor ${String(i+1).padStart(2,'0')}</option>`).join('');
+ $('inspectRocket').value=[...$('inspectRocket').options].some(o=>o.value===old)?old:'A1';
+}
+function actorRow(a){const q=actorState(a),f=(n,k=2)=>fmt(n,k);
+ return `<tr data-actor="${a.id}" class="${selectedActor()?.id===a.id?'selected':''}"><td class="${a.defender?'defCol':'inCol'}">${a.id}</td><td>${statusShort(q.status)}</td><td>${q.status==='EN ESPERA'?'—':f(q.tau)}</td><td>${q.status==='EN ESPERA'?'—':f(q.p[0],1)}</td><td>${q.status==='EN ESPERA'?'—':f(q.p[1],1)}</td><td>${q.status==='EN ESPERA'?'—':f(q.p[2],1)}</td><td>${q.active?f(q.speed,1):'—'}</td><td>${f(a.theta0,1)}°</td><td>${f(a.phi0,1)}°</td><td>${q.status==='EN ESPERA'?'—':f(q.theta,1)+'°'}</td><td>${q.status==='EN ESPERA'?'—':f(q.phi,1)+'°'}</td><td>${f(q.progress,0)} %</td></tr>`;
+}
+function actorSummaryCell(label,value){return `<div class="actorMetric"><small>${label}</small><strong>${value}</strong></div>`}
+function sceneReadings(){
+ const actors=allActors(),sel=selectedActor(),q=actorState(sel),att=actors.filter(a=>!a.defender),def=actors.filter(a=>a.defender);
+ $('sceneNow').textContent=fmt(time,2)+' s';$('attackerNum').textContent=att.length+' objetos';$('defenderNum').textContent=def.length+' objetos';
+ $('angleSelected').textContent=`${sel.defender?'Defensor':'Proyectil'} ${sel.id} · t = ${fmt(time,2)} s`;
+ $('sceneTheta0').textContent=fmt(sel.theta0,2)+'°';$('scenePhi0').textContent=fmt(sel.phi0,2)+'°';
+ $('sceneThetaNow').textContent=q.status==='EN ESPERA'?'En espera':fmt(q.theta,2)+'°';
+ $('scenePhiNow').textContent=q.status==='EN ESPERA'?'En espera':fmt(q.phi,2)+'°';
+ $('attackerRows').innerHTML=att.map(actorRow).join('');$('defenderRows').innerHTML=def.map(actorRow).join('');
+ $('sceneProgress').style.width=q.progress.toFixed(1)+'%';$('sceneProgressLabel').textContent=`${sel.id} · ${q.status} · ${fmt(q.progress,0)} % del recorrido · faltan ${fmt(q.remaining,2)} s`;
+ const unit=' u.e.',vel=' u.e./s',acc=' u.e./s²';
+ $('actorMetrics').innerHTML=[
+  actorSummaryCell('ID / grupo',`${sel.id} · ${sel.defender?'Defensor':'Proyectil'}`),
+  actorSummaryCell('Inicio / duración',`${fmt(sel.start)} s / ${fmt(sel.duration)} s`),
+  actorSummaryCell('Velocidad inicial |v₀|',fmt(sel.speed0)+vel),
+  actorSummaryCell('Ángulo inicial θ₀',fmt(sel.theta0)+'°'),
+  actorSummaryCell('Azimut φ₀',fmt(sel.phi0)+'°'),
+  actorSummaryCell('Elevación actual θ(t)',q.status==='EN ESPERA'?'En espera':fmt(q.theta)+'°'),
+  actorSummaryCell('Azimut actual φ(t)',q.status==='EN ESPERA'?'En espera':fmt(q.phi)+'°'),
+  actorSummaryCell('Altura máxima Z',fmt(sel.zmax)+unit),
+  actorSummaryCell('Desplazamiento horizontal ΔXY',fmt(sel.reach)+unit),
+  actorSummaryCell('Posición inicial (X₀,Y₀,Z₀)',sel.p0.map(v=>fmt(v,1)).join(', ')),
+  actorSummaryCell('Posición ahora (X,Y,Z)',q.status==='EN ESPERA'?'En espera':q.p.map(v=>fmt(v,1)).join(', ')),
+  actorSummaryCell('Componentes iniciales V₀',sel.v0.map(v=>fmt(v,1)).join(', ')),
+  actorSummaryCell('Componentes actuales V',q.status==='EN ESPERA'?'En espera':q.v.map(v=>fmt(v,1)).join(', ')),
+  actorSummaryCell('Rapidez instantánea |v|',q.status==='EN ESPERA'?'En espera':fmt(q.speed)+vel),
+ ].join('');
+ const f=n=>fmt(n,3),tau=q.tau,p=sel.p0,V=sel.v0,A=sel.a;
+ $('sceneCalculation').innerHTML=`<div class="sec">${sel.defender?'DEFENSOR':'PROYECTIL'} ${sel.id} · ${q.status}</div>
+ <div class="mathLine">Tiempo global t = ${f(time)} s; inicio t₀ = ${f(sel.start)} s</div>
+ <div class="mathLine">τ = mín(Δt, máx(0, t−t₀)) = <b>${f(tau)} s</b></div>
+ <div class="sec">Datos de salida (X,Y horizontales; Z altura)</div>
+ <div class="mathLine">P₀ = (${p.map(f).join('; ')}) u.e.</div>
+ <div class="mathLine">V₀ = (${V.map(f).join('; ')}) u.e./s</div>
+ <div class="mathLine">A = (${A.map(f).join('; ')}) u.e./s²</div>
+ <div class="mathLine">|V₀| = √(${V.map(v=>f(v)+'²').join(' + ')}) = <b>${f(sel.speed0)} u.e./s</b></div>
+ <div class="mathLine">θ₀ = atan2(V₀z, √(V₀x²+V₀y²)) = <b>${f(sel.theta0)}°</b></div>
+ <div class="mathLine">φ₀ = atan2(V₀y,V₀x) = <b>${f(sel.phi0)}°</b></div>
+ <div class="sec">Posición instantánea: P(τ) = P₀ + V₀τ + ½ Aτ²</div>
+ ${['X','Y','Z ↑'].map((label,i)=>`<div class="mathLine">${label} = ${f(p[i])} + (${f(V[i])} × ${f(tau)}) + ½(${f(A[i])} × ${f(tau)}²) = <b>${f(q.p[i])} u.e.</b></div>`).join('')}
+ <div class="sec">Velocidad instantánea: V(τ) = V₀ + Aτ</div>
+ ${['Vx','Vy','Vz'].map((label,i)=>`<div class="mathLine">${label} = ${f(V[i])} + (${f(A[i])} × ${f(tau)}) = <b>${f(q.v[i])} u.e./s</b></div>`).join('')}
+ <div class="mathLine">|V| = √(Vx²+Vy²+Vz²) = <b>${f(q.speed)} u.e./s</b></div>
+ <div class="mathLine">Elevación actual θ = atan2(${f(q.v[2])}, √(${f(q.v[0])}²+${f(q.v[1])}²)) = <b>${f(q.theta)}°</b></div>
+ <div class="mathLine">Azimut actual φ = atan2(${f(q.v[1])}, ${f(q.v[0])}) = <b>${f(q.phi)}°</b></div>
+ <div class="sec">Resultados calculados del recorrido</div>
+ <div class="mathLine">Duración Δt = ${f(sel.stop)} − ${f(sel.start)} = <b>${f(sel.duration)} s</b></div>
+ <div class="mathLine">ΔXY = √((Xf−X₀)²+(Yf−Y₀)²) = <b>${f(sel.reach)} u.e.</b></div>
+ <div class="mathLine">Máxima altura Z = <b>${f(sel.zmax)} u.e.</b></div>
+ <div class="mathLine">Coordenada final = (${sel.end.map(f).join('; ')}) u.e.</div>
+ <div class="tinyKey">Los valores son geométricos y escénicos. Las aceleraciones de estos recorridos no son la gravedad terrestre.</div>`;
+ $('initialRows').innerHTML=actors.map(a=>`<tr><td>${a.defender?'Defensor':'Proyectil'}</td><td>${a.id}</td><td>${fmt(a.start)}</td><td>${fmt(a.duration)}</td>${a.p0.map(x=>`<td>${fmt(x)}</td>`).join('')}${a.v0.map(x=>`<td>${fmt(x)}</td>`).join('')}<td>${fmt(a.speed0)}</td><td>${fmt(a.theta0)}°</td><td>${fmt(a.phi0)}°</td>${a.a.map(x=>`<td>${fmt(x)}</td>`).join('')}<td>${fmt(a.zmax)}</td><td>${fmt(a.reach)}</td></tr>`).join('');
+ drawMiniGraph(sel,q);drawAngleDiagram(sel,q);
+}
+$('attackerRows').addEventListener('click',e=>{const row=e.target.closest('tr[data-actor]');if(row){$('inspectRocket').value=row.dataset.actor;updateUI();draw()}});
+$('defenderRows').addEventListener('click',e=>{const row=e.target.closest('tr[data-actor]');if(row){$('inspectRocket').value=row.dataset.actor;updateUI();draw()}});
+function labReadings(m){
+ const t=Math.min(time,m.T),x=m.vx*t,gravPart=(m.g/2)*t*t,z=Math.max(0,m.vz*t-gravPart),vz=m.vz-m.g*t,
+       vt=Math.hypot(m.vx,m.vy,vz),phase=t>=m.T-1e-5?'LLEGADA':t===0?'INICIO':t<m.ta?'ASCENSO':'DESCENSO';
+ $('labNow').textContent=fmt(t)+' s';
+ $('instantX').textContent=fmt(x);$('instantY').textContent=fmt(0);$('instantZ').textContent=fmt(z);
+ $('instantVx').textContent=fmt(m.vx);$('instantVy').textContent=fmt(0);$('instantVz').textContent=fmt(vz);
+ $('instantV').textContent=fmt(vt);$('instantPhase').textContent=phase;
+ const thetaCurrent=Math.atan2(vz,Math.hypot(m.vx,m.vy))*180/Math.PI;
+ $('labTheta0').textContent=fmt(m.ang);$('labThetaNow').textContent=fmt(thetaCurrent);$('labPhi0').textContent=fmt(0);$('labPhiNow').textContent=fmt(0);
+ $('labPositionSteps').innerHTML=`<div>vₓ₀ = ${fmt(m.v)} cos(${fmt(m.ang,0)}°) = <b>${fmt(m.vx,3)} m/s</b></div><div>vᵧ₀ = 0 m/s &nbsp; (sin movimiento lateral)</div><div>v𝓏₀ = ${fmt(m.v)} sen(${fmt(m.ang,0)}°) = <b>${fmt(m.vz,3)} m/s</b></div><div>x(t) = ${fmt(m.vx,3)} × ${fmt(t,3)} = <b>${fmt(x,3)} m</b></div><div>y(t) = <b>0,000 m</b></div><div>z(t) = ${fmt(m.vz,3)} × ${fmt(t,3)} − ${fmt(m.g/2,3)} × ${fmt(t,3)}² = <b>${fmt(z,3)} m</b></div>`;
+ $('labVelocitySteps').innerHTML=`<div>vₓ(t) = vₓ₀ = <b>${fmt(m.vx,3)} m/s</b></div><div>vᵧ(t) = <b>0,000 m/s</b></div><div>v𝓏(t) = ${fmt(m.vz,3)} − ${fmt(m.g,3)} × ${fmt(t,3)} = <b>${fmt(vz,3)} m/s</b></div><div>|v| = √(${fmt(m.vx,3)}² + 0² + (${fmt(vz,3)})²) = <b>${fmt(vt,3)} m/s</b></div><div>θ(t) = atan2(${fmt(vz,3)}, √(${fmt(m.vx,3)}²+0²)) = <b>${fmt(thetaCurrent,2)}°</b></div><div>φ(t) = atan2(0, ${fmt(m.vx,3)}) = <b>0,00°</b></div><div>t total = <b>${fmt(m.T,3)} s</b> · Zₘₐₓ = <b>${fmt(m.Hm,3)} m</b></div>`;
+ $('labProgress').style.width=(Math.min(100,100*t/m.T)).toFixed(1)+'%';$('labProgressLabel').textContent=`${fmt(100*t/m.T,0)} % del tiempo de vuelo transcurrido`;
+}
+function updateUI(){
+ const end=endTime();time=Math.max(0,Math.min(time,end));$('timeline').max=String(end);$('timeline').value=String(time);$('clock').textContent=fmt(time,2)+' s';$('play').textContent=playing?'❚❚ Pausar':'▶ Reproducir';$('tempoVal').textContent=fmt(Number($('tempo').value),2)+'×';
+ if(mode==='scene'){
+  const ms=missions(),active=ms.filter(m=>time>=m.s&&time<m.hit).length,hits=ms.filter(m=>time>=m.hit).length;
+  $('sCount').innerHTML=String(ms.length).padStart(2,'0')+' <span>cohetes</span>';$('sActive').textContent=String(active).padStart(2,'0');$('sHits').textContent=String(hits).padStart(2,'0');$('sTime').innerHTML=fmt(time,1)+' <span>s</span>';
+  $('events').innerHTML=ms.map(m=>{const st=time>=m.hit?'COMPLETADO':time>=m.s?'EN VUELO':'EN ESPERA';return `<div class="event ${time>=m.hit?'done':time<m.s?'queued':''}"><span>COHETE ${String(m.i+1).padStart(2,'0')}</span><b>${st}</b></div>`}).join('');sceneReadings();
+ }else{
+  const m=lab();$('speedVal').textContent=m.v+' m/s';$('angleVal').textContent=m.ang+'°';$('gravityVal').textContent=fmt(m.g)+' m/s²';$('mRange').innerHTML=fmt(m.R)+' <span>m</span>';$('mHeight').innerHTML=fmt(m.Hm)+' <span>m</span>';$('mTime').innerHTML=fmt(m.T)+' <span>s</span>';$('mApex').innerHTML=fmt(m.ta)+' <span>s</span>';
+  $('liveFormula').innerHTML=`x(t) = ${fmt(m.vx,4)} · t<br>y(t) = 0<br>z(t) = ${fmt(m.vz,4)} · t − ${fmt(m.g/2,4)} · t²<br>v<sub>x</sub> = ${fmt(m.vx,4)} m/s<br>v<sub>y</sub> = 0 m/s<br>v<sub>z</sub>(t) = ${fmt(m.vz,4)} − ${fmt(m.g,2)} · t`;labReadings(m);
+ }
+}
+function setBackground(){let grad=ctx.createLinearGradient(0,0,0,560);grad.addColorStop(0,'#0a213a');grad.addColorStop(.65,'#0a1b32');grad.addColorStop(1,'#122034');ctx.fillStyle=grad;ctx.fillRect(0,0,1000,560);
+ for(let st of seedStars){ctx.fillStyle=`rgba(211,239,255,${st[2]})`;ctx.beginPath();ctx.arc(st[0],st[1],st[3],0,Math.PI*2);ctx.fill();}
+ const moon=ctx.createRadialGradient(790,95,8,790,95,95);moon.addColorStop(0,'#72b9df20');moon.addColorStop(1,'#72b9df00');ctx.fillStyle=moon;ctx.fillRect(690,0,200,200);
+ ctx.beginPath();ctx.moveTo(0,485);for(let x=0;x<=1000;x+=5){let y=452+12*Math.sin(x*.013)+14*Math.sin(x*.026+.7);ctx.lineTo(x,y);}ctx.lineTo(1000,560);ctx.lineTo(0,560);ctx.closePath();ctx.fillStyle='#132a36';ctx.fill();
+ ctx.beginPath();ctx.moveTo(0,480);for(let x=0;x<=1000;x+=5){ctx.lineTo(x,470+8*Math.sin(x*.037));}ctx.lineTo(1000,560);ctx.lineTo(0,560);ctx.closePath();ctx.fillStyle='#0e2432';ctx.fill();ctx.fillStyle='#152f3a';ctx.fillRect(0,483,1000,77);ctx.strokeStyle='#38676b';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,483);ctx.lineTo(1000,483);ctx.stroke();
+ // city shapes on horizon
+ for(let x=20;x<1000;x+=42){let ht=14+(x*17%23);ctx.fillStyle='#19333f';ctx.fillRect(x,483-ht,31,ht);ctx.fillStyle='#f5c46d66';for(let y=483-ht+6;y<480;y+=10)ctx.fillRect(x+8,y,3,4);}
+ ctx.font='11px ui-monospace,Consolas,monospace';ctx.fillStyle='#87bdc6a8';ctx.fillText('DOMO / MODELO EDUCATIVO',27,28);ctx.textAlign='right';ctx.fillText('PLANO X–Z / Z ↑ · 2D',974,28);ctx.textAlign='left';}
+function radar(){const x=520,y=500,r=405,dir=time*.45;ctx.save();ctx.strokeStyle='#56dada13';ctx.lineWidth=1;for(let n=1;n<=3;n++){ctx.beginPath();ctx.arc(x,y,r*n/3,Math.PI,2*Math.PI);ctx.stroke();}ctx.strokeStyle='#55d7cc30';ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.cos(dir)*r,y+Math.sin(dir)*r);ctx.stroke();ctx.restore();}
+function trace(points,start,end,color,lw=2.0,dash=[]){ctx.save();ctx.beginPath();let steps=60;if(end<=start){ctx.restore();return}for(let k=0;k<=steps;k++){let p=bez(points,lerp(start,end,k/steps));k===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y);}ctx.strokeStyle=color;ctx.lineWidth=lw;ctx.setLineDash(dash);ctx.stroke();ctx.restore();}
+function roundRect(x,y,w,h,r,fill,stroke){ctx.beginPath();ctx.roundRect(x,y,w,h,r);if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.stroke();}}
+function rocket(x,y,rot,scale,color,defender=false,engine=true){ctx.save();ctx.translate(x,y);ctx.rotate(rot+Math.PI/2);ctx.scale(scale,scale);ctx.shadowBlur=12;ctx.shadowColor=color; // points upward in local coords
+ if(engine){let fl=16+Math.sin(time*34+x*.01)*6;let flame=ctx.createLinearGradient(0,14,0,33+fl);flame.addColorStop(0,'#fdffff');flame.addColorStop(.25,defender?'#77eaff':'#ffaf55');flame.addColorStop(1,'#ff8d2200');ctx.fillStyle=flame;ctx.beginPath();ctx.moveTo(-4,14);ctx.quadraticCurveTo(-7,22,0,33+fl);ctx.quadraticCurveTo(7,23,4,14);ctx.fill();}
+ ctx.shadowBlur=0;
+ // fins / wings
+ ctx.fillStyle=defender?'#75d8e8':'#a64647';ctx.beginPath();ctx.moveTo(-5,9);ctx.lineTo(-12,18);ctx.lineTo(-5,14);ctx.lineTo(5,14);ctx.lineTo(12,18);ctx.lineTo(5,9);ctx.closePath();ctx.fill();
+ const grad=ctx.createLinearGradient(-5,0,6,0);grad.addColorStop(0,defender?'#4a9dac':'#7e8993');grad.addColorStop(.5,defender?'#f5faff':'#e0e8e8');grad.addColorStop(1,defender?'#4e9ea9':'#5f677a');ctx.fillStyle=grad;ctx.fillRect(-5,-12,10,26);
+ ctx.beginPath();ctx.moveTo(-5,-12);ctx.quadraticCurveTo(-4,-18,0,-27);ctx.quadraticCurveTo(4,-18,5,-12);ctx.closePath();ctx.fill();
+ ctx.fillStyle=defender?'#37eaf0':'#e45b4e';ctx.fillRect(-5,-4,10,4);ctx.fillRect(-5,7,10,3);ctx.restore();}
+function drawBase(x,index){ctx.save();ctx.translate(x,483);roundRect(-29,-14,58,14,4,'#3e5969','#7b9aab');roundRect(-23,-23,45,12,4,'#4b6c7b','#83a1b2');ctx.save();ctx.rotate(-.22);ctx.fillStyle='#a7c6c8';ctx.fillRect(-7,-42,11,23);ctx.fillStyle='#386879';ctx.fillRect(-8,-41,13,5);ctx.restore();ctx.fillStyle='#c7d4d9';ctx.font='10px ui-monospace,monospace';ctx.textAlign='center';ctx.fillText('L-'+String(index+1),0,18);ctx.restore();}
+function hitEffect(x,y,dt){if(dt<0||dt>1.25)return;const k=dt/1.25;ctx.save();let burst=ctx.createRadialGradient(x,y,0,x,y,42+dt*45);burst.addColorStop(0,`rgba(255,249,224,${.92*(1-k)})`);burst.addColorStop(.32,`rgba(255,218,129,${.55*(1-k)})`);burst.addColorStop(1,'#fcb75b00');ctx.fillStyle=burst;ctx.beginPath();ctx.arc(x,y,42+dt*45,0,2*Math.PI);ctx.fill();for(let n=0;n<3;n++){let r=17+dt*(56+n*20);ctx.strokeStyle=`rgba(${n===2?'91,228,255':'255,215,137'},${(.85-k)*.8})`;ctx.lineWidth=2.4-dt;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.stroke();}for(let i=0;i<12;i++){const a=i*Math.PI/6+.2;let d=18+dt*(47+(i%3)*12);ctx.fillStyle=`rgba(255,${i%2?218:246},173,${1-k})`;ctx.beginPath();ctx.arc(x+Math.cos(a)*d,y+Math.sin(a)*d,2.5*(1-k)+.3,0,Math.PI*2);ctx.fill();}ctx.restore();}
+function sceneDraw(){setBackground();
+ // Proyección X-Z: Y lateral no aparece en este perfil.
+ ctx.save();ctx.strokeStyle='#89c9d1b0';ctx.fillStyle='#b8dce6';ctx.lineWidth=1.3;
+ ctx.beginPath();ctx.moveTo(60,479);ctx.lineTo(970,479);ctx.moveTo(60,479);ctx.lineTo(60,110);ctx.stroke();
+ ctx.beginPath();ctx.moveTo(970,479);ctx.lineTo(960,475);ctx.lineTo(960,483);ctx.fill();
+ ctx.beginPath();ctx.moveTo(60,110);ctx.lineTo(56,121);ctx.lineTo(64,121);ctx.fill();
+ ctx.font='bold 12px Consolas,monospace';ctx.fillText('Z ↑',37,99);ctx.fillText('X →',927,466);ctx.restore();
+ if($('radar').checked)radar();const ms=missions();for(let [i,base] of [185,545,840].entries())drawBase(base,i);for(let m of ms){const inFrac=Math.max(0,Math.min(1,(time-m.s)/m.d));if($('paths').checked){trace(m.p,0,m.f,'#ef837752',1.5,[5,8]);const dp=worldPaths(m).defender.map(p=>[500+5*p[0],483-5*p[2]]);trace(dp,0,1,'#70eeea45',1.5,[4,7]);}
+ if(time>=m.s&&time<m.hit){trace(m.p,0,inFrac,'#fca27eaa',2.5);const p=bez(m.p,inFrac);let v=derivative(m.p,inFrac);rocket(p.x,p.y,Math.atan2(v.y,v.x),.9,'#ff9c71',false);if($('tags').checked){ctx.font='bold 10px ui-monospace,monospace';ctx.fillStyle='#ffb48f';ctx.fillText('OBJ '+(m.i+1),p.x+14,p.y-18);}}
+ if(time>=m.launch&&time<m.hit){const dfrac=(time-m.launch)/(m.hit-m.launch);const path=worldPaths(m).defender.map(p=>[500+5*p[0],483-5*p[2]]);trace(path,0,dfrac,'#7cf6efad',2.5);let p=bez(path,dfrac),v=derivative(path,dfrac);rocket(p.x,p.y,Math.atan2(v.y,v.x),.84,'#8dfef7',true);}
+ if(time>=m.hit)hitEffect(m.dest.x,m.dest.y,time-m.hit);
+}ctx.fillStyle='#b1e4e8';ctx.font='12px ui-monospace,monospace';ctx.fillText('TIEMPO: '+fmt(time,1)+'s',28,54);const focus=selectedActor(),focusState=actorState(focus);if(focusState.status!=='EN ESPERA'){roundRect(24,66,300,73,9,'#0b293dcc','#397688');ctx.fillStyle='#dff9f3';ctx.font='bold 11px ui-monospace,monospace';ctx.fillText(focus.id+' · VISTA LATERAL X–Z',38,84);ctx.font='11px ui-monospace,monospace';ctx.fillText('X = '+fmt(focusState.p[0],1)+'   Y = '+fmt(focusState.p[1],1)+'   Z ↑ = '+fmt(focusState.p[2],1),38,103);ctx.fillText('θ = '+fmt(focusState.theta,1)+'°    φ = '+fmt(focusState.phi,1)+'°',38,121);}if(time>=endScene()-.04){roundRect(335,60,330,73,12,'#092335db','#5ebfa1');ctx.textAlign='center';ctx.fillStyle='#dcf8e9';ctx.font='bold 22px Segoe UI,Arial';ctx.fillText('SECUENCIA COMPLETA',500,92);ctx.font='12px Segoe UI,Arial';ctx.fillText('Pulsa reiniciar o cambia la escena',500,114);ctx.textAlign='left';}}
+function arrow(x1,y1,x2,y2,col,width=2){const a=Math.atan2(y2-y1,x2-x1);ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-9*Math.cos(a-.45),y2-9*Math.sin(a-.45));ctx.lineTo(x2-9*Math.cos(a+.45),y2-9*Math.sin(a+.45));ctx.closePath();ctx.fill();}
+function labDraw(){
+ const m=lab();setBackground();const left=80,right=930,top=98,bottom=475;
+ const xmax=Math.max(m.R*1.16,50),zmax=Math.max(m.Hm*1.45,10),X=x=>left+x/xmax*(right-left),Z=z=>bottom-z/zmax*(bottom-top);
+ ctx.font='11px ui-monospace,monospace';ctx.strokeStyle='#72a9c029';ctx.lineWidth=1;
+ for(let k=0;k<=5;k++){let x=xmax*k/5;ctx.beginPath();ctx.moveTo(X(x),top);ctx.lineTo(X(x),bottom);ctx.stroke();ctx.fillStyle='#a6c4d7';ctx.fillText(fmt(x,0),X(x)-8,bottom+26);}
+ for(let k=0;k<=4;k++){let z=zmax*k/4;ctx.beginPath();ctx.moveTo(left,Z(z));ctx.lineTo(right,Z(z));ctx.stroke();ctx.fillText(fmt(z,1),24,Z(z)+4);}
+ ctx.fillStyle='#d1eaf2';ctx.font='bold 12px Segoe UI,Arial';ctx.fillText('Z - ALTURA (m)',25,79);ctx.fillText('X - AVANCE HORIZONTAL (m)',726,529);
+ ctx.lineWidth=3;ctx.beginPath();ctx.strokeStyle='#5debe4';ctx.setLineDash([8,7]);for(let j=0;j<=100;j++){let t=j*m.T/100,x=m.vx*t,z=m.vz*t-.5*m.g*t*t;j?ctx.lineTo(X(x),Z(z)):ctx.moveTo(X(x),Z(z));}ctx.stroke();ctx.setLineDash([]);
+ const tm=Math.min(time,m.T);ctx.strokeStyle='#91fff0';ctx.lineWidth=4;ctx.shadowBlur=11;ctx.shadowColor='#58eadd';ctx.beginPath();for(let j=0;j<=80;j++){let t=tm*j/80,x=m.vx*t,z=m.vz*t-.5*m.g*t*t;j?ctx.lineTo(X(x),Z(z)):ctx.moveTo(X(x),Z(z));}ctx.stroke();ctx.shadowBlur=0;
+ const point={x:X(m.vx*tm),y:Z(Math.max(0,m.vz*tm-.5*m.g*tm*tm))};const tangent=Math.atan2(-(m.vz-m.g*tm)/zmax*(bottom-top),m.vx/xmax*(right-left));rocket(point.x,point.y,tangent,1.3,'#7df9ef',true,tm<m.T-.01);
+ const ax=X(m.vx*m.ta),az=Z(m.Hm);ctx.strokeStyle='#ffcd7899';ctx.lineWidth=1.4;ctx.setLineDash([4,5]);ctx.beginPath();ctx.moveTo(ax,az);ctx.lineTo(ax,bottom);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#ffcf75';ctx.beginPath();ctx.arc(ax,az,6,0,Math.PI*2);ctx.fill();ctx.font='bold 12px Segoe UI,Arial';ctx.fillText('Zmáx = '+fmt(m.Hm)+' m',Math.min(ax+12,825),az-23);
+ ctx.fillStyle='#a6d6e4';ctx.font='12px Segoe UI,Arial';ctx.fillText('Inicio: (x=0, y=0, z=0)',left+4,bottom-12);ctx.fillText('R = '+fmt(m.R)+' m',Math.min(X(m.R)-65,800),bottom-15);
+ const vz=m.vz-m.g*tm,vecScale=2.4;arrow(point.x,point.y,point.x+Math.min(115,m.vx*vecScale),point.y-Math.max(-115,Math.min(115,vz*vecScale)),'#ffd37a',2.2);
+ roundRect(697,52,281,132,10,'#102f47df','#2e7182');ctx.fillStyle='#e5f7ff';ctx.font='bold 12px ui-monospace,monospace';ctx.fillText('v₀ = '+m.v+' m/s   θ = '+m.ang+'°',714,76);ctx.fillText('vx = '+fmt(m.vx,2)+' m/s',714,96);ctx.fillText('vy = 0,00 m/s',714,116);ctx.fillText('vz(t) = '+fmt(vz,2)+' m/s',714,136);ctx.fillText('x = '+fmt(m.vx*tm,1)+' m  z = '+fmt(Math.max(0,m.vz*tm-.5*m.g*tm*tm),1)+' m',714,156);ctx.fillText('θ(t) = '+fmt(Math.atan2(vz,m.vx)*180/Math.PI,2)+'°  φ = 0°',714,176);
+}
+
+/* VISTA ESPACIAL INTERACTIVA: proyección en perspectiva de una escena 3D. */
+const canvas3=$('display3d'),gc=canvas3.getContext('2d');
+let cameraYaw=-0.62,cameraPitch=.42,cameraRadius=275,dragging=false,lastMX=0,lastMY=0;
+const sub3=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]];
+const add3=(a,b)=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]];
+const mul3=(a,s)=>a.map(v=>v*s);
+const norm3=a=>{let n=Math.hypot(...a)||1;return a.map(v=>v/n)};
+const dot3=(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0);
+const cross3=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const b3=(p,u)=>{let k=1-u;return p[0].map((v,j)=>k*k*v+2*k*u*p[1][j]+u*u*p[2][j])};
+function bez3(p,u){return b3(p,u)}
+function dbez3(p,u){return p[0].map((_,j)=>2*(1-u)*(p[1][j]-p[0][j])+2*u*(p[2][j]-p[1][j]));}
+const lateralStarts=[-62,65,-30,-56,50,-11,-58,59],lateralEnds=[-25,17,39,-8,35,-28,-38,31];
+function worldPoint(screenX,screenY,lateralY){return [(screenX-500)/5,lateralY,(483-screenY)/5]}
+function worldPaths(m){
+ const yi=lateralStarts[m.i],ye=lateralEnds[m.i];
+ const incoming=[worldPoint(...m.p[0],yi),worldPoint(...m.p[1],(yi+ye)/2+16*(m.i%2?1:-1)),worldPoint(...m.p[2],ye)];
+ const meeting=bez3(incoming,m.f),start=worldPoint(m.b,483,[-10,8,14][m.i%3]);
+ const control=[(start[0]+meeting[0])/2,(start[1]+meeting[1])/2+8*(m.i%2?1:-1),Math.max(38,meeting[2]+19)];
+ return {inbound:incoming,defender:[start,control,meeting],meeting};
+}
+// Modelo analítico de cada curva escénica: P(t) = P0 + V0·τ + 1/2 A·τ².
+// No representa gravedad uniforme ni el guiado de sistemas reales.
+function actorModel(m,kind){
+ const w=worldPaths(m),defender=kind==='D',path=defender?w.defender:w.inbound;
+ const start=defender?m.launch:m.s,stop=m.hit,duration=stop-start,uMax=defender?1:m.f,rate=uMax/duration;
+ const p0=path[0].slice(),v0=dbez3(path,0).map(v=>v*rate);
+ const a=p0.map((_,k)=>2*(path[2][k]-2*path[1][k]+path[0][k])*rate*rate);
+ const end=bez3(path,uMax),speed0=Math.hypot(...v0),theta0=Math.atan2(v0[2],Math.hypot(v0[0],v0[1]))*180/Math.PI,phi0=Math.atan2(v0[1],v0[0])*180/Math.PI;
+ let extrema=[0,duration];if(a[2]<-1e-10){const apex=-v0[2]/a[2];if(apex>0&&apex<duration)extrema.push(apex)}
+ const zmax=Math.max(...extrema.map(t=>p0[2]+v0[2]*t+.5*a[2]*t*t));
+ const dx=end[0]-p0[0],dy=end[1]-p0[1],reach=Math.hypot(dx,dy);
+ return{id:kind+(m.i+1),kind,index:m.i,defender, m, start,stop,duration,p0,v0,a,end,theta0,phi0,speed0,zmax,reach};
+}
+function actorState(model,t=time){
+ const tau=Math.max(0,Math.min(model.duration,t-model.start));
+ const p=model.p0.map((v,i)=>v+model.v0[i]*tau+.5*model.a[i]*tau*tau);
+ const v=model.v0.map((x,i)=>x+model.a[i]*tau),speed=Math.hypot(...v);
+ const status=t<model.start?'EN ESPERA':t>=model.stop?'EVENTO':'EN VUELO';
+ const theta=Math.atan2(v[2],Math.hypot(v[0],v[1]))*180/Math.PI;
+ const phi=Math.hypot(v[0],v[1])<1e-10?model.phi0:Math.atan2(v[1],v[0])*180/Math.PI;
+ return{tau,p,v,speed,status,active:status==='EN VUELO',progress:100*tau/model.duration,theta,phi,remaining:Math.max(0,model.stop-t)};
+}
+function allActors(){return missions().flatMap(m=>[actorModel(m,'A'),actorModel(m,'D')])}
+function selectedActor(){const str=$('inspectRocket').value||'A1';const all=allActors();return all.find(a=>a.id===str)||all[0]}
+function statusShort(st){return st==='EN ESPERA'?'Espera':st==='EVENTO'?'Fin':'Vuelo'}
+function worldReadout(m,q){
+ const w=worldPaths(m),u=q.u,p=bez3(w.inbound,u),d=dbez3(w.inbound,u).map(v=>q.done?0:v/m.d);
+ return{p,v:d,speed:Math.hypot(...d)};
+}
+function cam(){
+ const target=[0,0,29],ce=Math.cos(cameraPitch);
+ const eye=add3(target,[cameraRadius*ce*Math.sin(cameraYaw),cameraRadius*ce*Math.cos(cameraYaw),cameraRadius*Math.sin(cameraPitch)]);
+ const forward=norm3(sub3(target,eye)),right=norm3(cross3(forward,[0,0,1])),up=norm3(cross3(right,forward));
+ return {eye,forward,right,up};
+}
+function project3(p,C){const v=sub3(p,C.eye),depth=dot3(v,C.forward);if(depth<=3)return null;let s=800/depth;return{x:500+dot3(v,C.right)*s,y:282-dot3(v,C.up)*s,depth,scale:s}}
+function L3(a,b,color='#5d90a3',width=1,alpha=1,C=cam()){let A=project3(a,C),B=project3(b,C);if(!A||!B)return;gc.save();gc.globalAlpha=alpha;gc.strokeStyle=color;gc.lineWidth=width;gc.beginPath();gc.moveTo(A.x,A.y);gc.lineTo(B.x,B.y);gc.stroke();gc.restore()}
+function pol3(pts,fill,stroke,C=cam()){let pp=pts.map(p=>project3(p,C));if(pp.some(x=>!x))return;gc.beginPath();gc.moveTo(pp[0].x,pp[0].y);pp.slice(1).forEach(p=>gc.lineTo(p.x,p.y));gc.closePath();if(fill){gc.fillStyle=fill;gc.fill();}if(stroke){gc.strokeStyle=stroke;gc.lineWidth=1;gc.stroke();}}
+function draw3DBackdrop(){
+ const g=gc.createLinearGradient(0,0,0,560);g.addColorStop(0,'#071c34');g.addColorStop(.6,'#091a30');g.addColorStop(1,'#11303a');gc.fillStyle=g;gc.fillRect(0,0,1000,560);
+ const halo=gc.createRadialGradient(770,58,12,770,58,340);halo.addColorStop(0,'#28778936');halo.addColorStop(1,'#10436400');gc.fillStyle=halo;gc.fillRect(0,0,1000,560);
+ for(let i=0;i<85;i++){const x=(i*161.3+43)%1000,y=(i*81.9+27)%370;gc.fillStyle=`rgba(209,244,255,${.10+(i%5)*.067})`;gc.fillRect(x,y,(i%6===0?2:1),(i%6===0?2:1));}
+}
+function terrain3(C){
+ // Plano horizontal X-Y, con Z=0; exclusivamente Z es vertical.
+ pol3([[-118,-82,-.9],[118,-82,-.9],[118,82,-.9],[-118,82,-.9]],'#0b3040','#295366',C);
+ pol3([[-115,-77,0],[115,-77,0],[115,77,0],[-115,77,0]],'#103143','#28536c',C);
+ for(let x=-110;x<=110;x+=10)L3([x,-77,0],[x,77,0],'#2e647e',.8,.53,C);
+ for(let y=-70;y<=70;y+=10)L3([-115,y,0],[115,y,0],'#2e647e',.8,.53,C);
+ L3([-112,0,.3],[113,0,.3],'#81b7cd',1.7,.88,C);L3([0,-76,.3],[0,78,.3],'#81b7cd',1.7,.88,C);
+ L3([0,0,0],[0,0,98],'#e9c27a',2.3,.95,C);
+ for(let [p,t,col] of [[[108,0,0],'X','#80c4dc'],[[0,74,0],'Y','#80c4dc'],[[0,0,92],'Z ↑','#ffda91']]){
+  let q=project3(p,C);if(q){gc.fillStyle=col;gc.font='bold 13px ui-monospace,Consolas';gc.fillText(t,q.x+6,q.y-7)}
+ }
+ if($('radar').checked){
+  for(let r=22;r<=88;r+=22){let pts=[];for(let i=0;i<=100;i++){let a=i*Math.PI*2/100;pts.push([Math.cos(a)*r,Math.sin(a)*r,.4]);}polyline3(pts,'#57ddbf27',1.0,C)}
+  let a=time*.46;L3([0,0,.2],[Math.cos(a)*95,Math.sin(a)*95,.2],'#5ddab955',1.6,1,C);
+ }
+}
+function polyline3(pts,col,width,C,dash=[]){gc.save();gc.strokeStyle=col;gc.lineWidth=width;gc.setLineDash(dash);gc.beginPath();let started=false;for(let p of pts){let q=project3(p,C);if(!q)continue;if(!started){gc.moveTo(q.x,q.y);started=true;}else gc.lineTo(q.x,q.y);}if(started)gc.stroke();gc.restore()}
+function trail3(pts,a,b,col,width,C,glow=false,dash=[]){if(b<=a)return;let list=[];const count=Math.max(2,Math.ceil(90*(b-a)));for(let j=0;j<=count;j++)list.push(bez3(pts,a+(b-a)*j/count));if(glow){gc.save();gc.shadowColor=col;gc.shadowBlur=14;polyline3(list,col,width,C,dash);gc.restore();}else polyline3(list,col,width,C,dash)}
+function cube3(origin,w,d,h,C){
+ const [x,y,z]=origin,p=(a,b,c)=>[x+a,y+b,z+c];
+ const top=[p(0,0,h),p(w,0,h),p(w,d,h),p(0,d,h)];
+ pol3([p(0,0,0),p(0,0,h),p(0,d,h),p(0,d,0)],'#244553',null,C);
+ pol3([p(0,d,0),p(0,d,h),p(w,d,h),p(w,d,0)],'#193848',null,C);
+ pol3([p(w,0,0),p(w,0,h),p(w,d,h),p(w,d,0)],'#173345',null,C);
+ pol3(top,'#3c6472','#568193',C);
+}
+function drawBase3(pos,i,C){
+ const p=pos,ground=[p[0],p[1],0];cube3([p[0]-7,p[1]-4,-.1],14,8,2.8,C);
+ const s=[p[0],p[1],2.8],e=[p[0]+3,p[1],10.5];
+ L3(s,e,'#c1d9df',6,1,C);L3([s[0]-4,s[1],2.6],[s[0]+4,s[1],2.6],'#83a3ae',2,1,C);
+ const q=project3(ground,C);if(q){gc.fillStyle='#d3f4f0';gc.font='bold 11px Consolas,monospace';gc.fillText('L-'+(i+1),q.x-12,q.y+17)}
+}
+function rocket3(p,vel,defender,C,index){
+ const dir=norm3(vel),ref=Math.abs(dir[2])>.94?[0,1,0]:[0,0,1],a=norm3(cross3(dir,ref)),b=norm3(cross3(dir,a));
+ const front=add3(p,mul3(dir,6.4)),neck=add3(p,mul3(dir,1.8)),rear=add3(p,mul3(dir,-5.0)),end=add3(p,mul3(dir,-6.2));
+ const plus=(p,u,k)=>add3(p,mul3(u,k));const body=defender?'#bfeff5':'#d3d8df',shade=defender?'#529da9':'#677e8d',fin=defender?'#4abcc6':'#a8645d';
+ // 3D fin surfaces
+ for(let ax of [a,b]){pol3([plus(rear,ax,-1.5),plus(rear,ax,-4.1),plus(neck,ax,-1.1),plus(neck,ax,1.1),plus(rear,ax,4.1),plus(rear,ax,1.5)],fin,null,C)}
+ pol3([plus(rear,a,-1.6),plus(neck,a,-1.6),front,plus(neck,a,1.6),plus(rear,a,1.6)],shade,'#b4c8cb',C);
+ pol3([plus(rear,b,-1.3),plus(neck,b,-1.3),front,plus(neck,b,1.3),plus(rear,b,1.3)],body,null,C);
+ let tailPt=project3(end,C),headPt=project3(front,C);if(tailPt&&headPt){const r=Math.max(1.4,1.4*tailPt.scale);gc.save();gc.shadowColor=defender?'#79ffec':'#ffb16d';gc.shadowBlur=21;gc.fillStyle=defender?'#8efcf1':'#ffbe74';gc.beginPath();gc.arc(tailPt.x,tailPt.y,r,0,Math.PI*2);gc.fill();gc.restore();}
+ if($('tags').checked&&headPt){gc.font='bold 11px Consolas,monospace';gc.fillStyle=defender?'#a4fff4':'#ffb7a0';gc.fillText((defender?'DEF ':'OBJ ')+String(index+1).padStart(2,'0'),headPt.x+12,headPt.y-6)}
+}
+function explosion3(p,dt,C){if(dt<0||dt>1.55)return;let q=project3(p,C);if(!q)return;let f=dt/1.55,r=(12+dt*60)*(q.scale/3.2);gc.save();let rad=gc.createRadialGradient(q.x,q.y,0,q.x,q.y,r*1.1);rad.addColorStop(0,`rgba(255,244,208,${.95*(1-f)})`);rad.addColorStop(.25,`rgba(251,180,94,${.7*(1-f)})`);rad.addColorStop(1,'rgba(235,129,60,0)');gc.fillStyle=rad;gc.beginPath();gc.arc(q.x,q.y,r*1.1,0,Math.PI*2);gc.fill();for(let i=0;i<3;i++){gc.strokeStyle=`rgba(${i===2?'113,235,240':'254,220,166'},${.8*(1-f)})`;gc.lineWidth=2.3-f*.9;gc.beginPath();gc.arc(q.x,q.y,r*(.45+i*.23),0,Math.PI*2);gc.stroke();}gc.restore()}
+function scene3dDraw(){
+ const C=cam();gc.clearRect(0,0,1000,560);draw3DBackdrop();terrain3(C);
+ // ground reference terrain at distinct depths
+ let builds=[];for(let i=0;i<34;i++){let x=-109+(i*31)%218,y=-69+(i*41)%138; if(Math.abs(x)<8&&Math.abs(y)<30)continue;builds.push({p:[x,y,0],depth:project3([x,y,0],C)?.depth||0,w:3+(i%4),d:4+(i%3),h:1.4+(i*7%6)});}builds.sort((a,b)=>b.depth-a.depth);for(let b of builds)cube3(b.p,b.w,b.d,b.h,C);
+ [[-63,-10,0],[9,8,0],[68,14,0]].forEach((p,i)=>drawBase3(p,i,C));
+ const mm=missions();for(let m of mm){const w=worldPaths(m),frac=Math.max(0,Math.min(m.f,(time-m.s)/m.d));
+  if($('paths').checked){trail3(w.inbound,0,m.f,'#fa97834d',1.2,C,false,[4,7]);trail3(w.defender,0,1,'#63e7e650',1.2,C,false,[3,7]);}
+  if(time>=m.s&&time<m.hit){trail3(w.inbound,0,frac,'#ffa480',2.5,C,true);let p=bez3(w.inbound,frac),v=dbez3(w.inbound,frac);rocket3(p,v,false,C,m.i)}
+  if(time>=m.launch&&time<m.hit){const u=(time-m.launch)/(m.hit-m.launch);trail3(w.defender,0,u,'#69f6e8',2.4,C,true);rocket3(bez3(w.defender,u),dbez3(w.defender,u),true,C,m.i)}
+  if(time>=m.hit)explosion3(w.meeting,time-m.hit,C);
+ }
+ gc.fillStyle='#d9eff5';gc.font='bold 12px Consolas,monospace';gc.fillText('PERSPECTIVA 3D / X–Y HORIZONTAL · Z VERTICAL',25,31);
+ gc.font='11px Consolas,monospace';gc.fillStyle='#7db2c2';gc.fillText('Z = ALTURA  |  COHETES: '+mm.length+'  |  t: '+fmt(time,2)+' s',25,51);
+ const selected=selectedActor(),fq=actorState(selected);
+ if(fq.status!=='EN ESPERA'){gc.fillStyle='#0e2e42dd';gc.strokeStyle='#35798a';gc.lineWidth=1;gc.beginPath();gc.roundRect(25,66,305,80,9);gc.fill();gc.stroke();gc.fillStyle='#d2f6f2';gc.font='bold 12px Consolas,monospace';gc.fillText(selected.id+' · DATOS DEL OBJETO',38,87);gc.font='11px Consolas,monospace';gc.fillText('X '+fmt(fq.p[0],1)+'    Y '+fmt(fq.p[1],1)+'    Z ↑ '+fmt(fq.p[2],1),38,109);gc.fillText('θ '+fmt(fq.theta,1)+'°   φ '+fmt(fq.phi,1)+'°',38,127);}
+ if(time>=endScene()-.04){gc.fillStyle='#102f41e8';gc.strokeStyle='#4a9b91';gc.beginPath();gc.roundRect(359,64,293,67,12);gc.fill();gc.stroke();gc.fillStyle='#d9faf1';gc.font='bold 19px Segoe UI,Arial';gc.textAlign='center';gc.fillText('SECUENCIA COMPLETA',505,93);gc.font='11px Segoe UI,Arial';gc.fillText('Puedes reiniciar o explorar en 2D',505,114);gc.textAlign='left';}
+}
+function drawAngleDiagram(actor,q){
+ const el=$('angleDiagram'),dpr=Math.min(window.devicePixelRatio||1,2),w=Math.max(300,Math.round(el.clientWidth||460)),h=122;
+ if(el.width!==Math.round(w*dpr)||el.height!==Math.round(h*dpr)){el.width=Math.round(w*dpr);el.height=Math.round(h*dpr)}
+ const a=el.getContext('2d');a.setTransform(dpr,0,0,dpr,0,0);a.clearRect(0,0,w,h);
+ const active=q.status!=='EN ESPERA',theta=(active?q.theta:actor.theta0)*Math.PI/180,phi=(active?q.phi:actor.phi0)*Math.PI/180;
+ const origins=[[Math.round(w*.25),78],[Math.round(w*.74),78]],rr=38;
+ for(let j=0;j<2;j++){
+  const [cx,cy]=origins[j],isTheta=j===0,angle=isTheta?theta:phi,col=isTheta?'#ffcf83':'#6ef6e9';
+  a.strokeStyle='#426379';a.lineWidth=1;a.beginPath();a.moveTo(cx-48,cy);a.lineTo(cx+51,cy);a.stroke();
+  a.strokeStyle='#3b5d72';a.beginPath();a.arc(cx,cy,rr,0,Math.PI*2);a.stroke();
+  const dx=Math.cos(angle),dy=-Math.sin(angle);
+  a.strokeStyle=col;a.lineWidth=3;a.beginPath();a.moveTo(cx,cy);a.lineTo(cx+dx*rr,cy+dy*rr);a.stroke();
+  a.beginPath();a.arc(cx+dx*rr,cy+dy*rr,3,0,Math.PI*2);a.fillStyle=col;a.fill();
+  a.beginPath();a.strokeStyle=col;a.lineWidth=1.8;a.arc(cx,cy,21,0,-angle,angle>0);a.stroke();
+  a.font='bold 11px Consolas,monospace';a.fillStyle='#cee8ef';a.textAlign='center';a.fillText(isTheta?'ELEVACIÓN X–Z':'AZIMUT EN X–Y',cx,20);
+  a.font='12px Consolas,monospace';a.fillStyle=col;a.fillText(fmt(angle*180/Math.PI,1)+'°',cx,113);
+  a.font='10px Consolas,monospace';a.fillStyle='#b4cbd5';a.textAlign='left';a.fillText('+X',cx+52,cy+3);
+ }
+}
+function drawMiniGraph(actor,q){
+ const cg=$('miniGraph'),dpr=Math.min(window.devicePixelRatio||1,2),cw=cg.clientWidth||300,ch=142,ww=Math.max(270,Math.round(cw*dpr));
+ if(cg.width!==ww||cg.height!==ch*dpr){cg.width=ww;cg.height=ch*dpr;}const cc=cg.getContext('2d');cc.setTransform(dpr,0,0,dpr,0,0);
+ let W=ww/dpr,H=ch,l=27,r=W-12,t=18,b=H-24;cc.clearRect(0,0,W,H);cc.fillStyle='#081c2f';cc.fillRect(0,0,W,H);
+ const hvals=[],vvals=[];for(let j=0;j<=90;j++){const e=actorState(actor,actor.start+actor.duration*j/90);hvals.push(e.p[2]);vvals.push(e.speed);}
+ const hmin=Math.min(0,...hvals),hmax=Math.max(...hvals,1),vmax=Math.max(...vvals,1);
+ cc.strokeStyle='#2d4961';cc.lineWidth=1;for(let j=0;j<4;j++){let y=t+(b-t)*j/3;cc.beginPath();cc.moveTo(l,y);cc.lineTo(r,y);cc.stroke();}
+ const plot=(vals,max,min,color)=>{cc.beginPath();vals.forEach((n,i)=>{const x=l+(r-l)*i/(vals.length-1),y=b-(n-min)/(max-min||1)*(b-t);i?cc.lineTo(x,y):cc.moveTo(x,y)});cc.strokeStyle=color;cc.lineWidth=2;cc.stroke()};
+ plot(hvals,hmax,hmin,'#6cefe7');plot(vvals,vmax,0,'#ffce7b');const xx=l+q.progress/100*(r-l);cc.strokeStyle='#fcffffa0';cc.setLineDash([4,4]);cc.beginPath();cc.moveTo(xx,t);cc.lineTo(xx,b);cc.stroke();cc.setLineDash([]);
+ cc.font='10px Consolas,monospace';cc.fillStyle='#9ec2d0';cc.fillText('0 s',l,H-7);cc.fillText(fmt(actor.duration,1)+' s',r-38,H-7);cc.fillStyle='#6cefe7';cc.fillText('— Z ALTURA',l+4,12);cc.fillStyle='#ffce7b';cc.fillText('— |V| RAPIDEZ',l+115,12);
+}
+let mx, my;canvas3.addEventListener('pointerdown',e=>{if(mode!=='scene'||sceneView!=='3d')return;dragging=true;canvas3.classList.add('drag');lastMX=e.clientX;lastMY=e.clientY;canvas3.setPointerCapture(e.pointerId)});
+canvas3.addEventListener('pointermove',e=>{if(!dragging)return;cameraYaw+=(e.clientX-lastMX)*.0085;cameraPitch=Math.max(.08,Math.min(1.39,cameraPitch+(e.clientY-lastMY)*.006));lastMX=e.clientX;lastMY=e.clientY;draw()});
+for(let k of ['pointerup','pointercancel','lostpointercapture'])canvas3.addEventListener(k,()=>{dragging=false;canvas3.classList.remove('drag')});
+canvas3.addEventListener('wheel',e=>{if(mode!=='scene'||sceneView!=='3d')return;e.preventDefault();cameraRadius=Math.max(135,Math.min(550,cameraRadius*Math.exp(e.deltaY*.001)));draw()},{passive:false});
+$('resetCamera').onclick=()=>{cameraYaw=-.62;cameraPitch=.42;cameraRadius=275;draw()};
+
+function draw(){if(mode==='lab'){ctx.clearRect(0,0,1000,560);labDraw();}else if(sceneView==='2d'){ctx.clearRect(0,0,1000,560);sceneDraw();}else scene3dDraw();}
+let lastUiUpdate=0;function frame(ts){if(!last)last=ts;let dt=Math.min(.07,(ts-last)/1000);last=ts;if(playing){time=Math.min(endTime(),time+dt*(mode==='scene'?Number($('tempo').value):.9));if(time>=endTime())playing=false;if(ts-lastUiUpdate>=70||!playing){updateUI();lastUiUpdate=ts;}draw();}requestAnimationFrame(frame);}
+for(let i=0;i<75;i++){let z=(i*127.137+11.3)%997;seedStars.push([z,(i*59.9+19)%390,.13+(i%4)*.09,.45+(i%3)*.35]);}
+function fitCanvas(){const dpr=Math.min(window.devicePixelRatio||1,2);c.width=Math.round(1000*dpr);c.height=Math.round(560*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);canvas3.width=Math.round(1000*dpr);canvas3.height=Math.round(560*dpr);gc.setTransform(dpr,0,0,dpr,0,0);draw();}
+window.addEventListener('resize',fitCanvas);rocketOptions();fitCanvas();updateUI();requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
